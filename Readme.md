@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
-* Студент: [Роман Шелепов](https://up.htmlacademy.ru/javascript/31/user/2197091).
-* Наставник: `Неизвестно`.
+-   Студент: [Роман Шелепов](https://up.htmlacademy.ru/javascript/31/user/2197091).
+-   Наставник: `[Arthur Litovko], (https://htmlacademy.ru/profile/id6927)`.
 
 ---
 
