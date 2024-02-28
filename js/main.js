@@ -66,7 +66,7 @@ const CommentsCount = {
 const AvatarImg = {
   FIRST: 1,
   LAST: 6,
-}
+};
 
 // Получение целого числа из переданного диапазона
 function getRandomInteger(min, max) {
