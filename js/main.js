@@ -38,18 +38,35 @@ const PHOTO_DESCRIPTIONS = [
 ];
 
 // Магические значения
-const MIN_PHOTO_ID = 1;
-const MAX_PHOTO_ID = 25;
-const MIN_PHOTO_ADRESS = 1;
-const MAX_PHOTO_ADRESS = 25;
-const MIN_COMMENT_ID = 1;
-const MAX_COMMENT_ID = 1_000;
-const MIN_LIKES_COUNT = 15;
-const MAX_LIKES_COUNT = 200;
-const MIN_COMMENTS_COUNT = 0;
-const MAX_COMMENTS_COUNT = 30;
-const FIRST_AVATAR_IMG = 1;
-const LAST_AVATAR_IMG = 6;
+const PhotoId = {
+  MIN: 1,
+  MAX: 25,
+};
+
+const PhotoAdress = {
+  MIN: 1,
+  MAX: 25,
+};
+
+const CommentId = {
+  MIN: 1,
+  MAX: 1_000,
+};
+
+const LikesCount = {
+  MIN: 15,
+  MAX: 200,
+};
+
+const CommentsCount = {
+  MIN: 0,
+  MAX: 30,
+};
+
+const AvatarImg = {
+  FIRST: 1,
+  LAST: 6,
+}
 
 // Получение целого числа из переданного диапазона
 function getRandomInteger(min, max) {
@@ -84,34 +101,33 @@ function createIdGenerator(min, max) {
   };
 }
 
-const generatePhotoId = createIdGenerator(MIN_PHOTO_ID, MAX_PHOTO_ID);
-const generateCommentId = createIdGenerator(MIN_COMMENT_ID, MAX_COMMENT_ID);
-const generatePhotosUrl = createIdGenerator(MIN_PHOTO_ADRESS, MAX_PHOTO_ADRESS);
+const generatePhotoId = createIdGenerator(PhotoId.MIN, PhotoId.MAX);
+const generateCommentId = createIdGenerator(CommentId.MIN, CommentId.MAX);
+const generatePhotosUrl = createIdGenerator(PhotoAdress.MIN, PhotoAdress.MAX);
 
 // Создание комментария
-const createComment = () => {
-  return {
-    id: generateCommentId(),
-    avatar: `img/avatar-${getRandomInteger(FIRST_AVATAR_IMG, LAST_AVATAR_IMG)}.svg`,
-    message: getRandomArrayElem(COMMENT_MESSAGES),
-    name: getRandomArrayElem(USER_NAMES),
-  };
-};
+const createComment = () => ({
+  id: generateCommentId(),
+  avatar: `img/avatar-${getRandomInteger(AvatarImg.FIRST, AvatarImg.LAST)}.svg`,
+  message: getRandomArrayElem(COMMENT_MESSAGES),
+  name: getRandomArrayElem(USER_NAMES),
+
+});
 
 // Генерация нескольких объектов - комментариев к фотографиям
-const similarComments = Array.from({ length: getRandomInteger(MIN_COMMENTS_COUNT, MAX_COMMENTS_COUNT) }, createComment);
+const similarComments = Array.from({ length: getRandomInteger(CommentsCount.MIN, CommentsCount.MAX) }, createComment);
 
 // Создание описания фотографии
-const createPhotoDescription = () => {
-  return {
-    id: generatePhotoId(),
-    url: `photos/${generatePhotosUrl()}.jpg`,
-    description: getRandomArrayElem(PHOTO_DESCRIPTIONS),
-    likes: getRandomInteger(MIN_LIKES_COUNT, MAX_LIKES_COUNT),
-    comments: similarComments,
-  };
-};
+const createPhotoDescription = () => ({
+  id: generatePhotoId(),
+  url: `photos/${generatePhotosUrl()}.jpg`,
+  description: getRandomArrayElem(PHOTO_DESCRIPTIONS),
+  likes: getRandomInteger(LikesCount.MIN, LikesCount.MAX),
+  comments: similarComments,
+});
 
 // Генерация нескольких объектов - описаний фотографии
 const PHOTO_DESCRIPTIONS_COUNT = 25;
 const similarPhotoDescriptions = Array.from({length: PHOTO_DESCRIPTIONS_COUNT}, createPhotoDescription);
+
+export {similarPhotoDescriptions};
