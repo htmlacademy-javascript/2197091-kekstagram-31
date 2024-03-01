@@ -26,12 +26,7 @@ const isLegit = (workingDayStart, workingDayEnd, meetingStart, meetingDuration) 
     return Number(array[0]) * 60 + Number(array[1]);
   };
 
-  const workStartInMinutes = calcMinutes(workingDayStart);
-  const workEndInMinutes = calcMinutes(workingDayEnd);
-  const meetingStartInMinutes = calcMinutes(meetingStart);
-  const meetingEndInMinutes = meetingStartInMinutes + meetingDuration;
-
-  return meetingEndInMinutes <= workEndInMinutes && meetingStartInMinutes >= workStartInMinutes;
+  return calcMinutes(meetingStart) + meetingDuration <= calcMinutes(workingDayEnd) && calcMinutes(meetingStart) >= calcMinutes(workingDayStart);
 };
 
 
@@ -39,5 +34,5 @@ const isLegit = (workingDayStart, workingDayEnd, meetingStart, meetingDuration) 
 
 strLength('Строка', 5);
 isPalindrome('Строка');
-isLegit('08:00', '14:30', '14:00', 90);
+isLegit('08:00', '17:30', '14:00', 90);
 
