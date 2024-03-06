@@ -1,3 +1,3 @@
-import {renderPhotoDescriptions} from './rendering.js';
+import './rendering.js';
 
-renderPhotoDescriptions();
+

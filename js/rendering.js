@@ -13,8 +13,10 @@ const similarPicturesFragment = document.createDocumentFragment();
 //
 similarPhotoDescriptions.forEach(({url, description, likes, comments}) => {
   const pictureTemplateCopy = pictureTemplate.cloneNode(true);
-  pictureTemplateCopy.querySelector('.picture__img').src = url;
-  pictureTemplateCopy.querySelector('.picture__img').alt = description;
+  const descrImage = pictureTemplateCopy.querySelector('.picture__img');
+
+  descrImage.src = url;
+  descrImage.alt = description;
   pictureTemplateCopy.querySelector('.picture__likes').textContent = likes;
   pictureTemplateCopy.querySelector('.picture__comments').textContent = comments.length;
 
@@ -23,9 +25,4 @@ similarPhotoDescriptions.forEach(({url, description, likes, comments}) => {
 });
 
 // Отрисовка готовых шаблонов с данными на странице
-const renderPhotoDescriptions = () => {
-  picturesList.appendChild(similarPicturesFragment);
-};
-
-export {renderPhotoDescriptions};
-
+picturesList.appendChild(similarPicturesFragment);
