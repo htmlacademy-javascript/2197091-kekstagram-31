@@ -85,7 +85,7 @@ const createComment = () => ({
 });
 
 // Генерация нескольких объектов - комментариев к фотографиям
-const similarComments = Array.from({ length: getRandomInteger(CommentsCount.MIN, CommentsCount.MAX) }, createComment);
+const similarComments = () => Array.from({ length: getRandomInteger(CommentsCount.MIN, CommentsCount.MAX) }, createComment);
 
 // Создание описания фотографии
 const createPhotoDescription = () => ({
@@ -93,7 +93,7 @@ const createPhotoDescription = () => ({
   url: `photos/${generatePhotosUrl()}.jpg`,
   description: getRandomArrayElem(PHOTO_DESCRIPTIONS),
   likes: getRandomInteger(LikesCount.MIN, LikesCount.MAX),
-  comments: similarComments,
+  comments: similarComments(),
 });
 
 // Генерация нескольких объектов - описаний фотографии
