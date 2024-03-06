@@ -1,3 +1,3 @@
-import {createSimilarPhotoDescriptions} from './descr-generator.js';
+import {renderPhotoDescriptions} from './rendering.js';
 
-createSimilarPhotoDescriptions();
+renderPhotoDescriptions();
