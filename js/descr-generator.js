@@ -75,7 +75,7 @@ const generatePhotoId = createIdGenerator(PhotoId.MIN, PhotoId.MAX);
 const generateCommentId = createIdGenerator(CommentId.MIN, CommentId.MAX);
 const generatePhotosUrl = createIdGenerator(PhotoAdress.MIN, PhotoAdress.MAX);
 
-// Создание комментария
+// Создание комментария к фотографии
 const createComment = () => ({
   id: generateCommentId(),
   avatar: `img/avatar-${getRandomInteger(AvatarImg.FIRST, AvatarImg.LAST)}.svg`,
@@ -100,4 +100,4 @@ const createPhotoDescription = () => ({
 const PHOTO_DESCRIPTIONS_COUNT = 25;
 const createSimilarPhotoDescriptions = () => Array.from({length: PHOTO_DESCRIPTIONS_COUNT}, createPhotoDescription);
 
-export {createSimilarPhotoDescriptions};
+export {createSimilarPhotoDescriptions, createComment};

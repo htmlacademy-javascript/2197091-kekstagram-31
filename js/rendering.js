@@ -1,31 +1,39 @@
 import {createSimilarPhotoDescriptions} from './descr-generator.js';
+import { openModal } from './pic-modal.js';
 
 // Шаблон
-const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
+const template = document.querySelector('#picture').content.querySelector('.picture');
+
 // Место для вставки в разметке
 const picturesList = document.querySelector('.pictures');
 
 // Создается массив элементов для шаблона
 const similarPhotoDescriptions = createSimilarPhotoDescriptions();
+
 // Создается пустой контейнер для хранения готовых шаблонов
 const similarPicturesFragment = document.createDocumentFragment();
 
-//
-similarPhotoDescriptions.forEach(({url, description, likes, comments}) => {
-  const pictureTemplateCopy = pictureTemplate.cloneNode(true);
-  pictureTemplateCopy.querySelector('.picture__img').src = url;
-  pictureTemplateCopy.querySelector('.picture__img').alt = description;
-  pictureTemplateCopy.querySelector('.picture__likes').textContent = likes;
-  pictureTemplateCopy.querySelector('.picture__comments').textContent = comments.length;
+similarPhotoDescriptions.forEach((item) => {
+  const templateCopy = template.cloneNode(true);
+  const descrImage = templateCopy.querySelector('.picture__img');
+
+
+  descrImage.src = item.url;
+  descrImage.alt = item.description;
+  templateCopy.querySelector('.picture__likes').textContent = item.likes;
+  templateCopy.querySelector('.picture__comments').textContent = item.comments.length;
+  templateCopy.href = `/photos/${item.id}.jpg`;
+
+  templateCopy.addEventListener('click', (evt) => {
+    evt.preventDefault();
+    openModal(item);
+  });
 
   // Заполнение контейнера готовыми данными
-  similarPicturesFragment.appendChild(pictureTemplateCopy);
+  similarPicturesFragment.append(templateCopy);
 });
 
 // Отрисовка готовых шаблонов с данными на странице
-const renderPhotoDescriptions = () => {
-  picturesList.appendChild(similarPicturesFragment);
-};
+picturesList.append(similarPicturesFragment);
 
-export {renderPhotoDescriptions};
 
